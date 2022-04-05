@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/articlesFragment"
         android:name="diken.nyarticles.ui.main.articles.ArticleFragment"
-        android:label="fragment_articles"
+        android:label="NY Times Most Popular"
         tools:layout="@layout/fragment_articles" />
 
     <fragment
