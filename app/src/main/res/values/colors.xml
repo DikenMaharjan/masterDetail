@@ -16,4 +16,15 @@
     <color name="secondaryDarkColor">#aa542c</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_100">#F4F4F5</color>
+    <color name="gray_200">#E4E4E7</color>
+    <color name="gray_300">#D4D4D8</color>
+    <color name="gray_400">#A1A1AA</color>
+    <color name="gray_500">#71717A</color>
+    <color name="gray_600">#52525B</color>
+    <color name="gray_700">#3F3F46</color>
+    <color name="gray_800">#27272A</color>
+    <color name="gray_900">#18181B</color>
 </resources>
