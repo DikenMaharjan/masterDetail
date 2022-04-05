@@ -21,7 +21,16 @@ class ArticlesRVA :
 
         private val context = binding.root.context
 
+        init {
+            setClickListenerForViewToShowItsDetail()
+        }
 
+        private fun setClickListenerForViewToShowItsDetail() {
+            binding.root.setOnClickListener {
+                it.findNavController()
+                    .navigate(R.id.action_articlesFragment_to_articleDetailFragment)
+            }
+        }
 
         fun bindView(article: Article) {
             binding.articlesRVLytTitleTV.text = article.title

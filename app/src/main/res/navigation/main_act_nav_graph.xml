@@ -9,7 +9,15 @@
         android:id="@+id/articlesFragment"
         android:name="diken.nyarticles.ui.main.articles.ArticleFragment"
         android:label="NY Times Most Popular"
-        tools:layout="@layout/fragment_articles" />
+        tools:layout="@layout/fragment_articles">
+        <action
+            android:id="@+id/action_articlesFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment"
+            app:enterAnim="@anim/enter_left_animation"
+            app:exitAnim="@anim/exit_left_animation"
+            app:popEnterAnim="@anim/enter_right_animation"
+            app:popExitAnim="@anim/exit_right_animation" />
+    </fragment>
 
     <fragment
         android:id="@+id/articleDetailFragment"
