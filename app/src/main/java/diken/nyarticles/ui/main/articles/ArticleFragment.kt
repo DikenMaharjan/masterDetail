@@ -13,11 +13,11 @@ import diken.nyarticles.ui.main.articles.recyclerview.ArticlesRVA
 
 
 @AndroidEntryPoint
-class ArticlesFragment : Fragment() {
+class ArticleFragment : Fragment() {
     private var _binding: FragmentArticlesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ArticlesFragmentViewModel by viewModels()
+    private val viewModel: ArticleFragmentViewModel by viewModels()
     private val adapter = ArticlesRVA()
 
     override fun onCreateView(
@@ -26,7 +26,12 @@ class ArticlesFragment : Fragment() {
     ): View {
         _binding = FragmentArticlesBinding.inflate(layoutInflater)
         setUpRecyclerView()
+        observeArticles()
         return binding.root
+    }
+
+    private fun observeArticles() {
+
     }
 
     private fun setUpRecyclerView() {

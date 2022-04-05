@@ -5,7 +5,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ArticlesFragmentViewModel
+class ArticleFragmentViewModel
 @Inject
 constructor() : ViewModel() {
+
+
 }
