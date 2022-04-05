@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import diken.nyarticles.databinding.FragmentArticlesBinding
@@ -30,7 +32,23 @@ class ArticleFragment : Fragment() {
         _binding = FragmentArticlesBinding.inflate(layoutInflater)
         setUpRecyclerView()
         observeArticles()
+        observeAdapterLoadStates()
         return binding.root
+    }
+
+    private fun observeAdapterLoadStates() {
+        articlesRVA.addLoadStateListener { combinedLoadStates ->
+            binding.articlesFrgLoadStateLyt.apply {
+                loadStateLytLoadingProgressBar.isVisible =
+                    combinedLoadStates.refresh is LoadState.Loading
+                loadStateLytRetryTextView.isVisible = combinedLoadStates.refresh is LoadState.Error
+                loadStateLytRetryImageView.isVisible =
+                    combinedLoadStates.refresh is LoadState.Error
+                loadStateLytRetryImageView.setOnClickListener {
+                    articlesRVA.refresh()
+                }
+            }
+        }
     }
 
     private fun observeArticles() {
