@@ -1,6 +1,6 @@
 package diken.nyarticles.network.response.viewedarticleresponse
 
-data class Result(
+data class Article(
     val `abstract`: String,
     val adx_keywords: String,
     val asset_id: Long,
