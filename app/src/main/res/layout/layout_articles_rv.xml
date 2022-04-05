@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:padding="18dp">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/articlesRVLyt_photo_IV"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginVertical="12dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,10 +29,11 @@
         android:lines="2"
         android:maxLines="2"
         android:textColor="@color/gray_900"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/articlesRVLyt_author_TV"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/articlesRVLyt_photo_IV"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.315"
         app:layout_constraintVertical_chainStyle="packed"
@@ -39,6 +43,7 @@
         android:id="@+id/articlesRVLyt_author_TV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:ellipsize="end"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/articlesRVLyt_date_TV"
@@ -52,11 +57,12 @@
         android:id="@+id/articlesRVLyt_date_TV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/articlesRVLyt_title_TV"
         app:layout_constraintTop_toBottomOf="@+id/articlesRVLyt_author_TV"
-        tools:text="2017-06-23"
-        app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24" />
+        tools:text="2017-06-23" />
 
     <ImageView
         android:id="@+id/imageView2"

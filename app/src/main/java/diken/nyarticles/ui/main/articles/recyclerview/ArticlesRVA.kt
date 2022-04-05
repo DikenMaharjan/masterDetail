@@ -1,10 +1,15 @@
 package diken.nyarticles.ui.main.articles.recyclerview
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import diken.nyarticles.R
 import diken.nyarticles.databinding.LayoutArticlesRvBinding
 import diken.nyarticles.network.response.viewedarticleresponse.Article
 
@@ -14,10 +19,38 @@ class ArticlesRVA :
         private val binding: LayoutArticlesRvBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private val context = binding.root.context
+
+
+
         fun bindView(article: Article) {
             binding.articlesRVLytTitleTV.text = article.title
-            binding.articlesRVLytAuthorTV.text = article.source
+            binding.articlesRVLytAuthorTV.text = article.byline
             binding.articlesRVLytDateTV.text = article.published_date
+            setImage(article)
+        }
+
+        private fun getGrayDrawable(): ColorDrawable {
+            return ColorDrawable(
+                ContextCompat.getColor(
+                    context,
+                    R.color.gray_300
+                )
+            )
+        }
+
+        private fun setImage(article: Article) {
+            val imageUrl = try {
+                article.media[0].mediaMetadata[0].url
+            } catch (e: IndexOutOfBoundsException) {
+                ""
+            }
+
+            Glide.with(binding.root.context)
+                .load(imageUrl)
+                .placeholder(getGrayDrawable())
+                .error(getGrayDrawable())
+                .into(binding.articlesRVLytPhotoIV)
         }
     }
 
