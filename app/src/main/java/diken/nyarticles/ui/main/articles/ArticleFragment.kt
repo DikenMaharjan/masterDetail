@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import diken.nyarticles.databinding.FragmentArticlesBinding
 import diken.nyarticles.ui.main.articles.recyclerview.ArticlesRVA
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -31,14 +33,18 @@ class ArticleFragment : Fragment() {
     }
 
     private fun observeArticles() {
-
+        viewModel.articlePageLiveData.observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+                adapter.submitData(it)
+            }
+        }
     }
 
     private fun setUpRecyclerView() {
         binding.articlesFrgArticlesRV.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            this.adapter = adapter
+            this.adapter = this@ArticleFragment.adapter
         }
     }
 
