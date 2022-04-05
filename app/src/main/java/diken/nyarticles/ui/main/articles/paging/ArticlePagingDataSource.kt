@@ -27,6 +27,5 @@ class ArticlePagingDataSource(
         } catch (e: IOException) {
             LoadResult.Error(e)
         }
-
     }
 }

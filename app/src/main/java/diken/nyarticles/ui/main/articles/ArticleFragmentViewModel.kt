@@ -12,8 +12,9 @@ import javax.inject.Inject
 class ArticleFragmentViewModel
 @Inject
 constructor(
-    private val articleRepository: ArticleRepository
+    articleRepository: ArticleRepository
 ) : ViewModel() {
+
     val articlePageLiveData =
         articleRepository.getArticlePagingDataFlow().cachedIn(viewModelScope).asLiveData()
 
