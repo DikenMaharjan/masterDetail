@@ -12,10 +12,11 @@ import com.bumptech.glide.Glide
 import diken.nyarticles.R
 import diken.nyarticles.databinding.LayoutArticlesRvBinding
 import diken.nyarticles.network.response.viewedarticleresponse.Article
+import diken.nyarticles.ui.main.articles.ArticleFragmentDirections
 
 class ArticlesRVA :
     PagingDataAdapter<Article, ArticlesRVA.Holder>(ArticlesDiffCallBack()) {
-    class Holder(
+    inner class Holder(
         private val binding: LayoutArticlesRvBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -26,9 +27,15 @@ class ArticlesRVA :
         }
 
         private fun setClickListenerForViewToShowItsDetail() {
-            binding.root.setOnClickListener {
-                it.findNavController()
-                    .navigate(R.id.action_articlesFragment_to_articleDetailFragment)
+            binding.root.setOnClickListener { rootView ->
+                getItem(bindingAdapterPosition)?.let {
+                    val action = ArticleFragmentDirections
+                        .actionArticlesFragmentToArticleDetailFragment(
+                            it
+                        )
+                    rootView.findNavController().navigate(action)
+                }
+
             }
         }
 

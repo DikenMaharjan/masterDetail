@@ -23,5 +23,9 @@
         android:id="@+id/articleDetailFragment"
         android:name="diken.nyarticles.ui.main.articledetails.ArticleDetailFragment"
         android:label="Detail"
-        tools:layout="@layout/fragment_article_detail" />
+        tools:layout="@layout/fragment_article_detail">
+        <argument
+            android:name="article"
+            app:argType="diken.nyarticles.network.response.viewedarticleresponse.Article" />
+    </fragment>
 </navigation>

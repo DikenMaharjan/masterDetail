@@ -6,6 +6,7 @@
     tools:context=".ui.main.articledetails.ArticleDetailFragment">
 
     <TextView
+        android:id="@+id/temp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="FragmentDetail" />
