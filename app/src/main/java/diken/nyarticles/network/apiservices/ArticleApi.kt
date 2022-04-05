@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ArticleApi {
 
-    @GET("svc/mostpopular/v2/viewed/0.json")
+    @GET("svc/mostpopular/v2/viewed/7.json")
     suspend fun getPopularArticle(
         @Query("api-key") apiKey: String = API_KEY
     ): Response<ViewedArticleResponse>

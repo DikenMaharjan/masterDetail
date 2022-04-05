@@ -15,7 +15,9 @@ class ArticlesRVA :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindView(article: Article) {
-            binding.articlesRVLytTV.text = article.title
+            binding.articlesRVLytTitleTV.text = article.title
+            binding.articlesRVLytAuthorTV.text = article.source
+            binding.articlesRVLytDateTV.text = article.published_date
         }
     }
 
