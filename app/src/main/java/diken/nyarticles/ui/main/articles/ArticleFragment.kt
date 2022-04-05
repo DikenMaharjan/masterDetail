@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import diken.nyarticles.databinding.FragmentArticlesBinding
 import diken.nyarticles.ui.main.articles.recyclerview.ArticlesRVA
+import diken.nyarticles.utils.RecyclerViewLoadStateAdapter
 import kotlinx.coroutines.launch
 
 
@@ -20,7 +21,7 @@ class ArticleFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ArticleFragmentViewModel by viewModels()
-    private val adapter = ArticlesRVA()
+    private val articlesRVA = ArticlesRVA()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,7 @@ class ArticleFragment : Fragment() {
     private fun observeArticles() {
         viewModel.articlePageLiveData.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
-                adapter.submitData(it)
+                articlesRVA.submitData(it)
             }
         }
     }
@@ -44,7 +45,9 @@ class ArticleFragment : Fragment() {
         binding.articlesFrgArticlesRV.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            this.adapter = this@ArticleFragment.adapter
+            this.adapter = articlesRVA.withLoadStateFooter(
+                RecyclerViewLoadStateAdapter { articlesRVA.retry() }
+            )
         }
     }
 
