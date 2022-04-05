@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/articlesFragment"
-        android:name="diken.nyarticles.ui.main.ArticlesFragment"
+        android:name="diken.nyarticles.ui.main.articles.ArticlesFragment"
         android:label="fragment_articles"
         tools:layout="@layout/fragment_articles" />
 
     <fragment
         android:id="@+id/articleDetailFragment"
-        android:name="diken.nyarticles.ui.main.ArticleDetailFragment"
+        android:name="diken.nyarticles.ui.main.articledetails.ArticleDetailFragment"
         android:label="Detail"
         tools:layout="@layout/fragment_article_detail" />
 </navigation>

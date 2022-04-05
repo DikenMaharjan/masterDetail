@@ -1,21 +1,24 @@
-package diken.nyarticles.ui.main
+package diken.nyarticles.ui.main.articledetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import diken.nyarticles.databinding.FragmentArticlesBinding
+import diken.nyarticles.databinding.FragmentArticleDetailBinding
 
-class ArticlesFragment : Fragment() {
-    private var _binding: FragmentArticlesBinding? = null
+
+class ArticleDetailFragment : Fragment() {
+    private var _binding: FragmentArticleDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentArticlesBinding.inflate(layoutInflater)
+        _binding = FragmentArticleDetailBinding.inflate(layoutInflater)
+
+
         return binding.root
     }
 
@@ -23,5 +26,6 @@ class ArticlesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }
