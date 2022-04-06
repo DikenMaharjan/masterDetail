@@ -2,6 +2,7 @@ package diken.nyarticles.ui.main.articles
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,18 +39,28 @@ class ArticleFragment : Fragment() {
 
     private fun observeAdapterLoadStates() {
         articlesRVA.addLoadStateListener { combinedLoadStates ->
+            when (val currentState = combinedLoadStates.refresh) {
+                is LoadState.Error -> {
+                    Toast.makeText(requireContext(), currentState.error.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+                else -> {}
+            }
+
             binding.articlesFrgLoadStateLyt.apply {
                 loadStateLytLoadingProgressBar.isVisible =
                     combinedLoadStates.refresh is LoadState.Loading
-                loadStateLytRetryTextView.isVisible = combinedLoadStates.refresh is LoadState.Error
-                loadStateLytRetryImageView.isVisible =
-                    combinedLoadStates.refresh is LoadState.Error
+                loadStateLytRetryTextView.isVisible = isRetryVisible(combinedLoadStates.refresh)
+                loadStateLytRetryImageView.isVisible = isRetryVisible(combinedLoadStates.refresh)
                 loadStateLytRetryImageView.setOnClickListener {
                     articlesRVA.refresh()
                 }
             }
         }
     }
+
+    private fun isRetryVisible(state: LoadState) =
+        state is LoadState.Error && articlesRVA.itemCount <= 0
 
     private fun observeArticles() {
         viewModel.articlePageLiveData.observe(viewLifecycleOwner) {
