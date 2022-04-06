@@ -1,9 +1,7 @@
 package diken.nyarticles.ui.main.articles
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import diken.nyarticles.R
 import diken.nyarticles.databinding.FragmentArticlesBinding
 import diken.nyarticles.ui.main.articles.recyclerview.ArticlesRVA
 import diken.nyarticles.utils.RecyclerViewLoadStateAdapter
@@ -30,6 +29,7 @@ class ArticleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentArticlesBinding.inflate(layoutInflater)
+        setHasOptionsMenu(true)
         setUpRecyclerView()
         observeArticles()
         observeAdapterLoadStates()
@@ -57,6 +57,19 @@ class ArticleFragment : Fragment() {
                 articlesRVA.submitData(it)
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.article_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.articleMenu_refresh -> articlesRVA.refresh()
+        }
+        return false
     }
 
     private fun setUpRecyclerView() {
