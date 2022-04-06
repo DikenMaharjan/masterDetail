@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import diken.nyarticles.databinding.FragmentArticleDetailBinding
 import diken.nyarticles.network.response.viewedarticleresponse.Article
@@ -29,8 +30,16 @@ class ArticleDetailFragment : Fragment() {
 
         setUpTitleAndAuthor()
         setUpViewPagerToDisplayPhotos()
+        setUpTabLayoutForViewPager()
 
         return binding.root
+    }
+
+    private fun setUpTabLayoutForViewPager() {
+        TabLayoutMediator(
+            binding.articlesDetailFrgTabLyt,
+            binding.articlesDetailFrgViewPagerForPhotos
+        ) { _, _ -> }.attach()
     }
 
     private fun setUpViewPagerToDisplayPhotos() {
@@ -40,12 +49,26 @@ class ArticleDetailFragment : Fragment() {
         binding.articlesDetailFrgViewPagerForPhotos.adapter = adapter
         binding.articlesDetailFrgNoPhotosFoundTV.isVisible = adapter.itemCount <= 0
 
+        setUpListenerToChangeCaption()
 
-        TabLayoutMediator(
-            binding.articlesDetailFrgTabLyt,
-            binding.articlesDetailFrgViewPagerForPhotos
-        ) { _, _ -> }.attach()
 
+    }
+
+    private fun setUpListenerToChangeCaption() {
+        binding.articlesDetailFrgViewPagerForPhotos.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    setCorrectImageCaption(position)
+                }
+            })
+    }
+
+    private fun setCorrectImageCaption(position: Int) {
+        try {
+            binding.articlesDetailFrgPhotoCaptionTV.text =
+                String.format("\"%s\"", article.media[position].caption)
+        } catch (e: IndexOutOfBoundsException) {
+        }
     }
 
     private fun setUpTitleAndAuthor() {

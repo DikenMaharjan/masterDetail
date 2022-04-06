@@ -62,4 +62,16 @@
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp" />
 
+    <TextView
+        android:id="@+id/articlesDetailFrg_photoCaption_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="none"
+        android:textColor="@color/gray_400"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articlesDetailFrg_tabLyt" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

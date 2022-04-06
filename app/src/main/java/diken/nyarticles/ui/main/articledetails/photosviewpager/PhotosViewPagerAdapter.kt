@@ -9,12 +9,14 @@ class PhotosViewPagerAdapter(
     private val mediaList: List<Media>
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
-        return mediaList.flatMap { it.mediaMetadata }.size
+        return mediaList.size
     }
 
     override fun createFragment(position: Int): Fragment {
         return PhotoFragment.newInstance(
-            mediaList.flatMap { media -> media.mediaMetadata.map { it.url } }[position]
+            mediaList[position].mediaMetadata.let {
+                it[it.size - 1]
+            }.url
         )
     }
 }
