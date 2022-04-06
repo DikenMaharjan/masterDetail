@@ -28,7 +28,7 @@ class ArticleDetailFragment : Fragment() {
         _binding = FragmentArticleDetailBinding.inflate(layoutInflater)
         article = arg.article
 
-        setUpTitleAndAuthor()
+        setUpTitleAuthorAndUrl()
         setUpViewPagerToDisplayPhotos()
         setUpTabLayoutForViewPager()
 
@@ -71,7 +71,8 @@ class ArticleDetailFragment : Fragment() {
         }
     }
 
-    private fun setUpTitleAndAuthor() {
+    private fun setUpTitleAuthorAndUrl() {
+        binding.articleDetailFrgUrlTV.text = article.url
         binding.articlesDetailFrgTitleTV.text = article.title
         binding.articlesDetailFrgAuthorTV.text = article.byline
     }
