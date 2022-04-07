@@ -10,8 +10,8 @@ import java.io.IOException
 class ArticlePagingDataSource(
     private val articleApi: ArticleApi
 ) : PagingSource<Int, Article>() {
-    override fun getRefreshKey(state: PagingState<Int, Article>): Int {
-        return 1
+    override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
